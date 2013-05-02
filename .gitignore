@@ -1,1 +1,5 @@
+# for Mac OS
 .DS_Store
+
+# for Sass
+.sass-cache
