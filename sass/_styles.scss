@@ -5,11 +5,23 @@
 header {
   text-align: center;
   & h1 {
-    padding-top: 20px;
-    padding-bottom: 20px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    @media screen and (max-width: 480px) {
+      margin-top: 20px;
+      margin-bottom: 20px;
+    }
   }
   & img {
-    margin-bottom: 35px;
+    margin-bottom: 20px;
+    @media screen and (max-width: 480px) {
+      margin-bottom: 20px;
+    }
+  }
+  & .btn {
+    @media (max-width: 480px) {
+      margin: 5px;
+    }
   }
 }
 
@@ -29,11 +41,7 @@ footer {
   color: $white;
 }
 
-.btn {
-  @media (max-width: 480px) {
-    margin: 8px;
-  }
-}
+
 
 // github fork me in css - https://github.com/simonwhitaker/github-fork-ribbon-css/blob/master/gh-fork-ribbon.css
 
@@ -98,6 +106,9 @@ footer {
   overflow: hidden;
   top: 0;
   z-index: 9999;
+  @media screen and (max-width: 767px) {
+    display: none;
+  }
 }
 
 .github-fork-ribbon-wrapper.right {

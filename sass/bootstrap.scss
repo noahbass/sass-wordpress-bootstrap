@@ -10,8 +10,8 @@
 
 // Core variables and mixins
 @import "variables"; // Modify this for custom colors, font-sizes, etc
-@import "styles";
 @import "partials/mixins";
+@import "styles";
 
 // CSS Reset
 @import "partials/reset";
