@@ -29,6 +29,12 @@ footer {
   color: $white;
 }
 
+.btn {
+  @media (max-width: 480px) {
+    margin: 8px;
+  }
+}
+
 // github fork me in css - https://github.com/simonwhitaker/github-fork-ribbon-css/blob/master/gh-fork-ribbon.css
 
 /* Left will inherit from right (so we don't need to duplicate code */
