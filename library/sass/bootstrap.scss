@@ -1,66 +1,64 @@
 /*!
- * Bootstrap v2.3.1
+ * Bootstrap v3.0.0
  *
- * Copyright 2012 Twitter, Inc
+ * Copyright 2013 Twitter, Inc
  * Licensed under the Apache License v2.0
  * http://www.apache.org/licenses/LICENSE-2.0
  *
- * Designed and built with all the love in the world @twitter by @mdo and @fat.
+ * Designed and built with all the love in the world by $mdo and $fat.
  */
 
-@import "partials/shame";
-
 // Core variables and mixins
-@import "variables"; // Modify this for custom colors, font-sizes, etc
-@import "partials/mixins";
-@import "partials/wp"; // the styles that would normally be in style.css put here for less stylesheets loaded
+@import "variables";
+@import "mixins";
 
-// CSS Reset
-@import "partials/reset";
+// Reset
+@import "normalize";
+@import "print";
 
-// Grid system and page structure
-@import "partials/scaffolding";
-@import "partials/grid";
-@import "partials/layouts";
+// Core CSS
+@import "scaffolding";
+@import "type";
+@import "code";
+@import "grid";
 
-// Base CSS
-@import "partials/type";
-@import "partials/code";
-@import "partials/forms";
-@import "partials/tables";
+@import "tables";
+@import "forms";
+@import "buttons";
 
 // Components: common
-@import "partials/sprites";
-@import "partials/dropdowns";
-@import "partials/wells";
-@import "partials/component-animations";
-@import "partials/close";
-
-// Components: Buttons & Alerts
-@import "partials/buttons";
-@import "partials/button-groups";
-@import "partials/alerts"; // Note: alerts share common CSS with buttons and thus have styles in buttons
+@import "component-animations";
+@import "glyphicons";
+@import "dropdowns";
+@import "list-group";
+@import "panels";
+@import "wells";
+@import "close";
 
 // Components: Nav
-@import "partials/navs";
-@import "partials/navbar";
-@import "partials/breadcrumbs";
-@import "partials/pagination";
-@import "partials/pager";
+@import "navs";
+@import "navbar";
+@import "button-groups";
+@import "breadcrumbs";
+@import "pagination";
+@import "pager";
 
 // Components: Popovers
-@import "partials/modals";
-@import "partials/tooltip";
-@import "partials/popovers";
+@import "modals";
+@import "tooltip";
+@import "popovers";
 
 // Components: Misc
-@import "partials/thumbnails";
-@import "partials/media";
-@import "partials/labels-badges";
-@import "partials/progress-bars";
-@import "partials/accordion";
-@import "partials/carousel";
-@import "partials/hero-unit";
+@import "alerts";
+@import "thumbnails";
+@import "media";
+@import "labels";
+@import "badges";
+@import "progress-bars";
+@import "accordion";
+@import "carousel";
+@import "jumbotron";
 
 // Utility classes
-@import "partials/utilities"; // Has to be last to override when necessary
+@import "utilities"; // Has to be last to override when necessary
+@import "responsive-utilities";
