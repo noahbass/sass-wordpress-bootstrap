@@ -85,18 +85,19 @@ function optionsframework_options() {
 		
 	$options[] = array( "name" => "Typography",
 						"type" => "heading");
-						
+			
 	$options[] = array( "name" => "Headings",
 						"desc" => "Used in H1, H2, H3, H4, H5 & H6 tags.",
 						"id" => "heading_typography",
 						"std" => "",
-						"type" => "wpbs_typography");
+						"type" => "typography");
+						
 						
 	$options[] = array( "name" => "Main Body Text",
 						"desc" => "Used in P tags.",
 						"id" => "main_body_typography",
 						"std" => "",
-						"type" => "wpbs_typography");
+						"type" => "typography");
 						
 	$options[] = array( "name" => "Link Color",
 						"desc" => "Default used if no color is selected.",
@@ -175,6 +176,18 @@ function optionsframework_options() {
 						"id" => "search_bar",
 						"std" => "",
 						"type" => "checkbox");
+
+	$options[] = array( "name" => "Branding Logo",
+						"desc" => "Select an image to use for site branding",
+						"id" => "branding_logo",
+						"std" => "",
+						"type" => "upload");
+
+	$options[] = array( "name" => "Site name",
+						"desc" => "Check to show the site name in the navbar",
+						"id" => "site_name",
+						"std" => "1",
+						"type" => "checkbox");
 						
 	$options[] = array( "name" => "Theme",
 						"type" => "heading");
@@ -231,13 +244,19 @@ function optionsframework_options() {
 						"id" => "blog_hero",
 						"std" => "1",
 						"type" => "checkbox");
+
+	$options[] = array( "name" => "Custom favicon",
+						"desc" => "URL for a valid .ico favicon",
+						"id" => "favicon_url",
+						"std" => "",
+						"type" => "text");
 	
 	$options[] = array( "name" => "CSS",
 						"desc" => "Additional CSS",
 						"id" => "wpbs_css",
 						"std" => "",
 						"type" => "textarea");
-									
+															
 	return $options;
 }
 
@@ -266,25 +285,20 @@ jQuery(document).ready(function($) {
 add_action('wp_ajax_wpbs_theme_check', 'wpbs_refresh_themes');
 
 function wpbs_refresh_themes() {
-	// this gets the xml feed from thomas park
-	$xml_feed_url = 'http://feeds.pinboard.in/rss/u:thomaspark/t:bootswatch/';
-	$ch = curl_init();
-	curl_setopt($ch, CURLOPT_URL, $xml_feed_url);
-	curl_setopt($ch, CURLOPT_HEADER, false);
-	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-	$xml = curl_exec($ch);
-	curl_close($ch);
-	
-	$feed = new SimpleXmlElement($xml, LIBXML_NOCDATA);	
-	
-    $cnt = count($feed->item);
     
-    // go through each item found
-    for($i=0; $i<$cnt; $i++)
+    //Bootswatch API Method
+    $BS_url = 'http://api.bootswatch.com';
+    $content = file_get_contents($BS_url);
+    $json = json_decode($content, true);
+    
+    
+    foreach ($json['themes'] as $item)
     {
-		$url 	= $feed->item[$i]->link;
-		$title 	= strtolower($feed->item[$i]->title);
-		$desc = $feed->item[$i]->description;
+		
+		$url = $item['css-min'];
+		$title = strtolower($item['name']);
+		$desc = $item['description'];
+		
 		
 		// retrieve the contents of the css file
 		$css_url = $url;
@@ -295,8 +309,8 @@ function wpbs_refresh_themes() {
 		$css_contents = curl_exec($ch);
 		curl_close($ch);
 		
-		$thumb_url_prefix = 'http://bootswatch.com/';
-		$thumb_url = $thumb_url_prefix . $title . '/thumbnail.png';
+		//retreive thumbnail
+		$thumb_url = $item['thumbnail'];
 		$ch = curl_init();
 		curl_setopt($ch, CURLOPT_URL, $thumb_url);
 		curl_setopt($ch, CURLOPT_HEADER, false);
@@ -325,6 +339,7 @@ function wpbs_refresh_themes() {
 
 	die(); // this is required to return a proper result
 }
+
 
 
 ?>
